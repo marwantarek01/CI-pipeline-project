@@ -26,5 +26,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+      
     - name: Build the Docker image
-      run: docker build -tag node-app:$(date +%s) . 
+      run: docker build -t node-app:$(date +%s) . 
