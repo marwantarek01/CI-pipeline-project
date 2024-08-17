@@ -27,4 +27,4 @@ jobs:
 
     steps:
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag node-app:$(date +%s)
+      run: docker build -tag node-app:$(date +%s) . 
