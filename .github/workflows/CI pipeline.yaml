@@ -30,4 +30,6 @@ jobs:
       uses: docker/setup-buildx-action@v2
       
     - name: Build the Docker image
+      run: pwd
+      run: ls
       run: docker build -t node-app:$(date +%s) . 
