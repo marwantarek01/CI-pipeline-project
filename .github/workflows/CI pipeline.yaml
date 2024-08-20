@@ -39,3 +39,10 @@ jobs:
       
     - name: Build the Docker image
       run: docker build -t node-app:$(date +%s) . 
+    - name: test2
+      run: ls -al
+    - name: pwd2
+      run: pwd
+
+  
+
