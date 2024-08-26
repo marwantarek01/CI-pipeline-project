@@ -22,27 +22,16 @@ jobs:
       run: npm init -y 
   
       
-  build-docker:
+  build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-    - name: checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v2
-    - name: test
-      run: ls -al
-    - name: pwd
-      run: pwd
-      
-      
-    - name: Build the Docker image
-      run: docker build -t node-app:$(date +%s) . 
-    - name: test2
-      run: ls -al
-    - name: pwd2
-      run: pwd
-
-  
-
+      - name: checkout code
+        uses: actions/checkout@v4
+        
+      - name: Build and Push Container to ECR
+        uses: GlueOps/github-actions-build-push-containers@v0.3.7
+        with:
+          registry: "<aws-account-id>.dkr.ecr.<aws-region>.amazonaws.com"
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_default_region: ${{ env.AWS_REGION}}
