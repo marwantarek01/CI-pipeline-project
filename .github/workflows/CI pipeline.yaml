@@ -25,14 +25,14 @@ jobs:
       run: npm init -y 
   
       
-  build-and-push:
+  login-ecr:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v4
         
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4 # More information on this action can be found below in the 'AWS Credentials' section
+        uses: aws-actions/configure-aws-credentials@v4 # e found b
         with:
           role-to-assume: arn:aws:iam::869935092981:role/GithubActions-ecr
           aws-region: ${{ secrets.AWS_REGION}}
