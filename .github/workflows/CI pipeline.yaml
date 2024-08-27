@@ -38,11 +38,19 @@ jobs:
           role-to-assume: ${{ secrets.IAM_ROLE}}
           aws-region: ${{ secrets.AWS_REGION}}
 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2  
+
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{ vars.REPOSITORY_URI}}
+          REPOSITORY: trego
+          IMAGE_TAG: latest
         run: |
-          docker build -t trego .
-          docker tag trego:latest ${{ vars.REPOSITORY_URI}}:latest
-          docker push $REPOSITORY::latest
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG    
+
+
+
+  
