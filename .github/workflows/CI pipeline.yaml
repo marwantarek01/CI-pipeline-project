@@ -67,6 +67,16 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG  
+          
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: '869935092981.dkr.ecr.eu-central-1.amazonaws.com/trego:latest'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+ 
+
+
   
 
 
