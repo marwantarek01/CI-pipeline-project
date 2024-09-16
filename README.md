@@ -21,7 +21,7 @@ This project aims to implement a CI pipeline that automates the building and tes
     
 ## Architecture
 
-![Architecture](https://github.com/marwantarek01/assets/blob/main/CI%20pipeline.pdf)
+![Architecture](https://github.com/marwantarek01/assets/blob/main/cipipeline%20arch.png)
 
 - Pipeline Triggered by code commits or pull requests.
 - The pipeline builds and runs tests on the Node.js application to ensure code correctness.
@@ -81,7 +81,7 @@ The first job in the CI pipeline is to generate the `package.json` file and inst
 
 An NGINX reverse proxy is set up on a separate EC2 instance in a public subnet of the same VPC to route traffic to the SonarQube server, enabling access to the SonarQube web console.
 
-![rev-proxy](https://github.com/marwantarek01/assets/blob/main/rev%20proxy.pdf)
+![rev-proxy](https://github.com/marwantarek01/assets/blob/main/rev-proxy-arh.png)
 
 
 ### Steps
