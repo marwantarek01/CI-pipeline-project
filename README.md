@@ -113,10 +113,10 @@ This section provides a guide on how to use GitHub Actions to build and push  do
 Instead of using long-term AWS credentials,  OpenID Connect (OIDC) is used to gain temporary access to AWS resources. by generating temporary credentials which is valid for a short time, making it much safer than using long-term access keys
 
 ### How OIDC work
--	Token Request: The workflow initiates a request to GitHub for a token from the OIDC (OpenID Connect) provider.
--	Token Issuance: GitHub issues a token containing critical metadata, including the identity of the workflow (repository, branch, etc.) and the intended audience (e.g., sts.amazonaws.com), indicating that the token is meant for AWS.
--	AWS Role Assumption: The workflow sends the token to AWS, requesting permission to assume a specific role to perform actions such as pushing a Docker image. AWS verifies the token by checking its origin (GitHub's OIDC provider URL) and ensuring the audience is valid (i.e., the token is intended for AWS).
-- Temporary Access Granted: Upon successful validation, AWS grants temporary access to the workflow, allowing it to perform the necessary operations.
+1.	Token Request: The workflow initiates a request to GitHub for a token from the OIDC (OpenID Connect) provider.
+2. Token Issuance: GitHub issues a token containing critical metadata, including the identity of the workflow (repository, branch, etc.) and the intended audience (e.g., sts.amazonaws.com), indicating that the token is meant for AWS.
+3. 	AWS Role Assumption: The workflow sends the token to AWS, requesting permission to assume a specific role to perform actions such as pushing a Docker image. AWS verifies the token by checking its origin (GitHub's OIDC provider URL) and ensuring the audience is valid (i.e., the token is intended for AWS).
+4. Temporary Access Granted: Upon successful validation, AWS grants temporary access to the workflow, allowing it to perform the necessary operations.
 
 ### Configuration details
 - Create aws IAM Role and add the needed policy (for example allow githubActions to push images to AWS ECR)
