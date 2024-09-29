@@ -72,9 +72,9 @@ The first job in the CI pipeline is to generate the `package.json` file and inst
     sonarqube:10.0.6-community
  ```
 
- - docker run -d –name sonarqube :  creates and starts Docker container named “sonarqube” in detached mode
--  -p 9000:9000: Maps port 9000 on your local machine to port 9000 in the container. 
--  -v option is used to mount Three Docker volumes to ensure persistence: `sonarqube_data` for SonarQube data, `sonarqube_extensions` for plugins and extensions, and `sonarqube_logs` for logs.
+ - **docker run -d –name sonarqube :**   creates and starts Docker container named “sonarqube” in detached mode
+-  **-p 9000:9000:**  Maps port 9000 on your local machine to port 9000 in the container. 
+- **-v option is used to mount Three Docker volumes to ensure persistence:**  `sonarqube_data` for SonarQube data, `sonarqube_extensions` for plugins and extensions, and `sonarqube_logs` for logs.
 -  `sonarqube:10.0.6-community`:   SonarQube Docker image name
 
 ### Accessing SonarQube
@@ -86,7 +86,7 @@ An NGINX reverse proxy is set up on a separate EC2 instance in a public subnet o
 
 ### Steps
 - 	launch AWS EC2 instance in a public subnet and install nginx.
-- create new file in conf.d directory  ` sudo nano  /etc/nginx/conf.d/reverse-proxy.conf`
+- create new file in conf.d directory  ``` sudo nano  /etc/nginx/conf.d/reverse-proxy.conf ```
 - 	define reverse proxy and restart nginx. 
 ```
 server {
@@ -113,10 +113,10 @@ This section provides a guide on how to use GitHub Actions to build and push  do
 Instead of using long-term AWS credentials,  OpenID Connect (OIDC) is used to gain temporary access to AWS resources. by generating temporary credentials which is valid for a short time, making it much safer than using long-term access keys
 
 ### How OIDC work
-1.	Token Request: The workflow initiates a request to GitHub for a token from the OIDC (OpenID Connect) provider.
-2. Token Issuance: GitHub issues a token containing critical metadata, including the identity of the workflow (repository, branch, etc.) and the intended audience (e.g., sts.amazonaws.com), indicating that the token is meant for AWS.
-3. 	AWS Role Assumption: The workflow sends the token to AWS, requesting permission to assume a specific role to perform actions such as pushing a Docker image. AWS verifies the token by checking its origin (GitHub's OIDC provider URL) and ensuring the audience is valid (i.e., the token is intended for AWS).
-4. Temporary Access Granted: Upon successful validation, AWS grants temporary access to the workflow, allowing it to perform the necessary operations.
+1.	**Token Request:** The workflow initiates a request to GitHub for a token from the OIDC (OpenID Connect) provider.
+2. **Token Issuance:** GitHub issues a token containing critical metadata, including the identity of the workflow (repository, branch, etc.) and the intended audience (e.g., sts.amazonaws.com), indicating that the token is meant for AWS.
+3. **AWS Role Assumption:** The workflow sends the token to AWS, requesting permission to assume a specific role to perform actions such as pushing a Docker image. AWS verifies the token by checking its origin (GitHub's OIDC provider URL) and ensuring the audience is valid (i.e., the token is intended for AWS).
+4. **Temporary Access Granted:** Upon successful validation, AWS grants temporary access to the workflow, allowing it to perform the necessary operations.
 
 ### Configuration details
 - Create aws IAM Role and add the needed policy (for example allow githubActions to push images to AWS ECR)
