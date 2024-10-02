@@ -10,7 +10,7 @@ This project aims to implement a CI pipeline that automates the building and tes
     - [perquisites](#perquisites)
     - [deploy SonarQube container](#deploy-sonarqube-container)
     - [Accessing SonarQube](#accessing-sonarqube)
-    - [Integration with github Actions pipeline](#integration-with-github-actions-pipeline)
+    - [Integration with github Actions](#integration-with-github-actions)
 4. [Build and push docker image to AWS ECR](#build-and-push-docker-image-to-aws-ecr)
     - [Authenticate GitHub Actions with AWS using OIDC](#authenticate-github-actions-with-aws-using-oidc)
     - [GitHub Actions Workflow file](#ithub-actions-workflow-file)
@@ -96,9 +96,17 @@ listen 80;
 }}
 ```
 
-### Integration with github Actions pipeline  
--	create github app with the necessary permissions and key and install it on the repo.
--	on sonarqube webconsole setup github and add the needed credentials for the created github app.
+### Integration with github Actions  
+#### create GitHub app
+- Homepage URL : URL to SonarQube documentation.
+- Callback URL : URL to SonarQube server ```http://reverse-proxy-ip:port```
+- Create private key.
+- Install the GitHub app on the repository.
+#### setup GitHub on SonarQube server
+-	on sonarqube webconsole setup github and add the needed credentials for the created for the created Github app. for example: appID, ClientID, Client-secret.
+- Create GitHub secret ```SONAR_TOKEN``` and enter the generated SonarQube token.
+- Create GitHub secret ```SONAR_HOST_URL``` and enter the host url ```http://reverse-proxy-ip:port```
+  
 
 ![sonarqube success](https://github.com/marwantarek01/assets/blob/main/sonarqube%20success.png)
 
