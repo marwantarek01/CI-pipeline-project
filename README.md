@@ -92,6 +92,7 @@ An NGINX reverse proxy is set up on a separate EC2 instance in a public subnet o
 server {
 listen 80;
  server_name your-public-ip-or-domain;
+ client_max_body_size 300M;      #increase nginx req size 
  location / { proxy_pass http://sonarqube-private-ip:9000;
 }}
 ```
